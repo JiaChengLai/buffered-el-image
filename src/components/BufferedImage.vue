@@ -4,19 +4,21 @@
       class="image"
       v-show="image1.isMain"
       :src="image1.src"
-      @load="loadSuccess1"/>
+      @load="loadSuccess1"
+      @error="image1.isLoaded=true"/>
     <el-image
       class="image"
       v-show="image2.isMain"
       :src="image2.src"
-      @load="loadSuccess2"/>
+      @load="loadSuccess2"
+      @error="image2.isLoaded=true"/>
   </div>
 </template>
 
 <script>
 
 export default {
-  data () {
+  data() {
     return {
       // currentIndex: 1,
       isInitialized: false,
@@ -33,7 +35,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     // setInterval(() => {
     //   if (this.change(this.currentIndex)) {
     //     this.currentIndex++
@@ -44,7 +46,7 @@ export default {
     // }, 100)
   },
   methods: {
-    async change (imageName) {
+    async change(imageName) {
       if (this.isChanging) {
         console.log('当前正在进行图片切换，拒绝再次进行切换！')
         return false
@@ -89,7 +91,7 @@ export default {
       }
       return true
     },
-    loadSuccess1 () {
+    loadSuccess1() {
       this.image1.isLoaded = true
       if (this.isInitialized) {
         console.log('已切换到image1')
@@ -101,7 +103,7 @@ export default {
         }
       }
     },
-    loadSuccess2 () {
+    loadSuccess2() {
       this.image2.isLoaded = true
       if (this.isInitialized) {
         console.log('已切换到image2')
@@ -113,7 +115,7 @@ export default {
         }
       }
     },
-    sleep (time) {
+    sleep(time) {
       return new Promise((resolve) => setTimeout(resolve, time))
     }
   }
